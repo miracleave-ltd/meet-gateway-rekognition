@@ -1,0 +1,5 @@
+SNEAKER_SHOE = ['スニーカー', '人気']
+MONITOR_DISPLAY = ['モニター', 'ディスプレイ', '人気']
+PC_LAPTOP = ['ノートパソコン', '人気']
+BAG_TOTEBAG = ['トートバッグ', '人気']
+CHAIR = ['椅子', '人気']
