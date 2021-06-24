@@ -42,7 +42,6 @@ def lambda_handler(event, context):
             labels = detect['Labels']
             
             for value in labels:
-                print(value)
                 if value['Name'] == 'Monitor' or value['Name'] == 'Display':
                     search_condition = name_map.MONITOR_DISPLAY
                     break
