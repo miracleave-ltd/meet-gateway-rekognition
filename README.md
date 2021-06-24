@@ -82,7 +82,7 @@
 
 　（５）成功と表示されるので、ユーザー情報のCSVファイルをダウンロード。
 
-　（６）ログアウトする。
+　（６）サインアウトする。
 
 　（７）ユーザー情報のCSVファイル内に記載してあるURLにアクセス。
 
@@ -104,21 +104,25 @@
 
 # **【２：LINE Developers編】**
 
+※デフォルトが英語となっています。コンソール画面右下の設定で日本語にできます！
+
+![readme_picture/Untitled%201.png](readme_picture/Untitled%201.png)
+
 ### **（１）プロバイダーを作成する**
 
 　　　コンソール画面にて、プロバイダーの「作成」ボタンをクリック。
 
-![readme_picture/Untitled%201.png](readme_picture/Untitled%201.png)
+![readme_picture/Untitled%202.png](readme_picture/Untitled%202.png)
 
 　　　プロバイダー名は任意。（例：sample provider）
 
-![readme_picture/Untitled%202.png](readme_picture/Untitled%202.png)
+![readme_picture/Untitled%203.png](readme_picture/Untitled%203.png)
 
 ### **（２）チャネルを作成する**
 
 　　　Messaging APIを選択。
 
-![readme_picture/Untitled%203.png](readme_picture/Untitled%203.png)
+![readme_picture/Untitled%204.png](readme_picture/Untitled%204.png)
 
 　　　
 
@@ -142,15 +146,17 @@
 
 　　　Messaging API設定タブ内の下部にある「発行」ボタンを押下。
 
-![readme_picture/Untitled%204.png](readme_picture/Untitled%204.png)
+![readme_picture/Untitled%205.png](readme_picture/Untitled%205.png)
 
 # **【３：AWS編】**
 
 ### **（１）GitHubからソースをダウンロードする**
 
-　　　緑色の「Code」を押下し、zip形式でダウンロード。
+　　　[zipファイル](https://github.com/miracleave-ltd/meet-gateway-rekognition/archive/refs/heads/main.zip)
 
-![readme_picture/Untitled%205.png](readme_picture/Untitled%205.png)
+　　　もしくは、緑色の「Code」を押下し、zip形式でダウンロード。
+
+![readme_picture/Untitled%206.png](readme_picture/Untitled%206.png)
 
 ### **（２）Lambda関数を作成する**
 
@@ -158,7 +164,7 @@
 
 　　　「関数の作成」を押下。
 
-![readme_picture/Untitled%206.png](readme_picture/Untitled%206.png)
+![readme_picture/Untitled%207.png](readme_picture/Untitled%207.png)
 
 　　　
 
@@ -172,7 +178,7 @@
 
 　　　・アクセス権限…「基本的なLambdaアクセス権限で新しいロールを作成」
 
-![readme_picture/Untitled%207.png](readme_picture/Untitled%207.png)
+![readme_picture/Untitled%208.png](readme_picture/Untitled%208.png)
 
 　　　設定後、「関数の作成」ボタンを押下。
 
@@ -182,7 +188,19 @@
 
 　　　・ソースコード配置
 
-![readme_picture/Untitled%208.png](readme_picture/Untitled%208.png)
+　　　　GitHubからダウンロードしたファイル内のソースをコピーし、
+
+　　　　Lambdaのコードソース上にペーストしてください。
+
+　　　　以下に格納されているファイル2点
+
+　　　　　meet-gateway-rekognition-main ›  aws_url_bot
+
+　　　　　・**lambda_function.py**（既に同名ファイルが存在するので、ペースト）
+
+　　　　　・**name_map.py**（name_map.pyという名前でファイルを新規追加し、ペースト）
+
+![readme_picture/Untitled%209.png](readme_picture/Untitled%209.png)
 
 　　　・環境変数（発行したLINEのチャンネルアクセストークン）を設定
 
@@ -190,15 +208,15 @@
 
 　　　　値…１の（３）にて発行したアクセストークンをコピペ
 
-![readme_picture/Untitled%209.png](readme_picture/Untitled%209.png)
-
 ![readme_picture/Untitled%2010.png](readme_picture/Untitled%2010.png)
+
+![readme_picture/Untitled%2011.png](readme_picture/Untitled%2011.png)
 
 ### **（３）トリガーを追加する（API Gatewayの設定）**
 
 　　　関数の概要から、「トリガーを追加」ボタンを押下。
 
-![readme_picture/Untitled%2011.png](readme_picture/Untitled%2011.png)
+![readme_picture/Untitled%2012.png](readme_picture/Untitled%2012.png)
 
 　　　トリガーの設定は、以下の通りに設定し、「作成」ボタンを押下する。
 
@@ -214,7 +232,7 @@
 
 　　　・デプロイされるステージ…defaultでOK
 
-![readme_picture/Untitled%2012.png](readme_picture/Untitled%2012.png)
+![readme_picture/Untitled%2013.png](readme_picture/Untitled%2013.png)
 
 ### **（４）APIエンドポイントをLINE DevelopersのチャネルのWeb hookに設定**
 
@@ -222,17 +240,17 @@
 
 　　　APIエンドポイントが表示されるので、コピー。
 
-![readme_picture/Untitled%2013.png](readme_picture/Untitled%2013.png)
+![readme_picture/Untitled%2014.png](readme_picture/Untitled%2014.png)
 
 　　　作成したチャネルの「Messaging API設定」タブから、Webhook URLに
 
 　　　先ほどコピーしたAPIエンドポイントを設定し、更新ボタンを押下。
 
-![readme_picture/Untitled%2014.png](readme_picture/Untitled%2014.png)
+![readme_picture/Untitled%2015.png](readme_picture/Untitled%2015.png)
 
 　　　Webhookの利用をオンにする。
 
-![readme_picture/Untitled%2015.png](readme_picture/Untitled%2015.png)
+![readme_picture/Untitled%2016.png](readme_picture/Untitled%2016.png)
 
 ### **（５）Lambda関数のロールを作成する**
 
@@ -244,13 +262,13 @@
 
 　　　画面左側のダッシュボードから「ロール」を押下する。
 
-![readme_picture/Untitled%2016.png](readme_picture/Untitled%2016.png)
+![readme_picture/Untitled%2017.png](readme_picture/Untitled%2017.png)
 
 　　　
 
 　　　「ロールの作成」ボタンを押下する。
 
-![readme_picture/Untitled%2017.png](readme_picture/Untitled%2017.png)
+![readme_picture/Untitled%2018.png](readme_picture/Untitled%2018.png)
 
 　　　ユースケースの選択にて「Lambda」を選択し、
 
@@ -272,7 +290,7 @@
 
 　　　ポリシーが正しく設定されているか確認し、「ロールの作成」ボタンを押下する。
 
-![readme_picture/Untitled%2018.png](readme_picture/Untitled%2018.png)
+![readme_picture/Untitled%2019.png](readme_picture/Untitled%2019.png)
 
 　　　
 
@@ -282,17 +300,17 @@
 
 　　　を押下する。
 
-![readme_picture/Untitled%2019.png](readme_picture/Untitled%2019.png)
+![readme_picture/Untitled%2020.png](readme_picture/Untitled%2020.png)
 
 　　　先ほど作成したロールを、実行ロールとして設定する。
 
-![readme_picture/Untitled%2020.png](readme_picture/Untitled%2020.png)
+![readme_picture/Untitled%2021.png](readme_picture/Untitled%2021.png)
 
 ### **（６）デプロイする**
 
 　　　
 
-![readme_picture/Untitled%2021.png](readme_picture/Untitled%2021.png)
+![readme_picture/Untitled%2022.png](readme_picture/Untitled%2022.png)
 
 # 【**４：リソースの削除方法**】
 
@@ -302,7 +320,7 @@
 
 　　　API名左側のチェックを入れ、画面右側のアクションボタンから、Deleteを押下。
 
-![readme_picture/Untitled%2022.png](readme_picture/Untitled%2022.png)
+![readme_picture/Untitled%2023.png](readme_picture/Untitled%2023.png)
 
 　　　削除するかどうか聞かれるので、削除する。
 
@@ -312,7 +330,7 @@
 
 　　　関数名左側のチェックを入れ、画面右側のアクションボタンから、削除を押下。
 
-![readme_picture/Untitled%2023.png](readme_picture/Untitled%2023.png)
+![readme_picture/Untitled%2024.png](readme_picture/Untitled%2024.png)
 
 　　　削除するかどうか聞かれるので、削除する。
 
@@ -322,25 +340,25 @@
 
 　　　ユーザー名左側のチェックを入れ、ユーザーの削除ボタンを押下。
 
-![readme_picture/Untitled%2024.png](readme_picture/Untitled%2024.png)
+![readme_picture/Untitled%2025.png](readme_picture/Untitled%2025.png)
 
 　　　チェックボックスにチェックを入れ、削除する。
 
-![readme_picture/Untitled%2025.png](readme_picture/Untitled%2025.png)
+![readme_picture/Untitled%2026.png](readme_picture/Untitled%2026.png)
 
 ### （４）チャネルの削除
 
 　　　チャネル基本設定タブの最下部にある、削除ボタンを押下。
 
-![readme_picture/Untitled%2026.png](readme_picture/Untitled%2026.png)
+![readme_picture/Untitled%2027.png](readme_picture/Untitled%2027.png)
 
 　　　LINE Official Account Managerを表示ボタンを押下。
 
-![readme_picture/Untitled%2027.png](readme_picture/Untitled%2027.png)
+![readme_picture/Untitled%2028.png](readme_picture/Untitled%2028.png)
 
 　　　同意の箇所にチェックを入れ、アカウントを削除する。
 
-![readme_picture/Untitled%2028.png](readme_picture/Untitled%2028.png)
+![readme_picture/Untitled%2029.png](readme_picture/Untitled%2029.png)
 
 ### （５）プロバイダーの削除
 
@@ -348,4 +366,4 @@
 
 　　　削除しますか？と聞かれるので、削除する。
 
-![readme_picture/Untitled%2029.png](readme_picture/Untitled%2029.png)
+![readme_picture/Untitled%2030.png](readme_picture/Untitled%2030.png)

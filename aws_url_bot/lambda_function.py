@@ -18,7 +18,6 @@ def lambda_handler(event, context):
         ## AWS処理
         ###########
         
-        aws_url = 'https://AWS画像解析URL'
         headers = {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + LINE_CHANNEL_ACCESS_TOKEN
@@ -26,22 +25,21 @@ def lambda_handler(event, context):
 
         # 画像ID取得
         gazo_id =  message_event['message']['id']
-        # AWS画像解析APIへリクエスト
+        
         geturl = "https://api-data.line.me/v2/bot/message/" + gazo_id + "/content"
         getmethod = "GET"
         request = urllib.request.Request(geturl, method=getmethod, headers=headers)
         
+        # LINEサーバーへリクエスト
         with urllib.request.urlopen(request) as res:
-            body1 = res.read()
-
+            body = res.read()
+            # Rekognitionのラベル検出を呼び出し
             detect = rekognition.detect_labels(
                 Image={
-                    "Bytes": body1
+                    "Bytes": body
                 }
             )
             labels = detect['Labels']
-            
-            search_condition = None
             
             for value in labels:
                 print(value)
@@ -79,8 +77,3 @@ def lambda_handler(event, context):
             line_req = urllib.request.Request(line_url, data=json.dumps(line_body).encode('utf-8'), method='POST', headers=headers)
             with urllib.request.urlopen(line_req) as res:
                 logging.info(res.read().decode("utf-8"))
-
-    return {
-        'statusCode': 200,
-        'body': json.dumps('Hello from Lambda!')
-    }
