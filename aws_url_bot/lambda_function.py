@@ -76,3 +76,9 @@ def lambda_handler(event, context):
             line_req = urllib.request.Request(line_url, data=json.dumps(line_body).encode('utf-8'), method='POST', headers=headers)
             with urllib.request.urlopen(line_req) as res:
                 logging.info(res.read().decode("utf-8"))
+
+    #####以下追加で動きました#####                
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Helloo from Lambda!')
+    }
